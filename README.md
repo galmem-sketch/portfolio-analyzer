@@ -46,6 +46,37 @@ streamlit run app.py
 | scipy | Statistical distributions |
 | requests / beautifulsoup4 | Bank of Israel rate scraping |
 
+## Project Structure
+
+```
+portfolio-analyzer/
+├── app.py                        # Main entry point — page config, sidebar nav, step dispatcher
+│
+├── core/                         # Business logic (no UI)
+│   ├── portfolio.py              # Data classes: AssetEntry, PortfolioConfig
+│   ├── data_fetcher.py           # Yahoo Finance downloads, ticker search, BOI rate scraping
+│   ├── metrics.py                # Portfolio & hypothetical metrics (μ, σ, Sharpe, weights)
+│   └── benchmark.py             # Benchmark preset definitions (SPY, TA-125, etc.)
+│
+├── ui/                           # Streamlit UI components (one per wizard step)
+│   ├── portfolio_form.py         # Step 1 — ticker search and holdings entry
+│   ├── benchmark_selector.py     # Step 3 — benchmark picker (preset or custom)
+│   ├── what_if.py                # Step 5 — hypothetical portfolio simulator
+│   ├── charts.py                 # Step 6 — efficiency plot and bell curve charts
+│   ├── tables.py                 # Styled HTML tables for portfolio and hypothetical summaries
+│   └── report_pdf.py             # Step 6 — builds self-contained HTML report for PDF export
+│
+├── utils/
+│   ├── __init__.py               # to_float() helper (handles pandas scalars safely)
+│   └── styles.py                 # Shared CSS for styled tables
+│
+├── .github/workflows/
+│   └── ci.yml                    # CI — installs deps and syntax-checks all .py files on push
+│
+├── requirements.txt              # Python dependencies
+└── .gitignore                    # Excludes .venv, __pycache__, secrets.toml
+```
+
 ## Deployment
 
 Hosted on [Streamlit Community Cloud](https://streamlit.io/cloud). Every push to `main` auto-redeploys within ~60 seconds.
