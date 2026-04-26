@@ -23,6 +23,7 @@ from ui.what_if import render_what_if
 from ui.charts import plot_efficiency, plot_bell_curve
 from ui.tables import render_portfolio_table, render_hypo_table
 from ui.report_pdf import build_report_html
+from ui.info_page import render_info_page
 
 plt.style.use('seaborn-v0_8-muted')
 
@@ -36,6 +37,8 @@ st.set_page_config(
 # ── Session-state defaults ────────────────────────────────────────────────────
 if "step" not in st.session_state:
     st.session_state["step"] = 1
+if "show_info" not in st.session_state:
+    st.session_state["show_info"] = False
 
 
 # ── Sidebar progress indicator ────────────────────────────────────────────────
@@ -51,6 +54,13 @@ STEPS = [
 with st.sidebar:
     st.title("Portfolio Analyzer")
     st.markdown("---")
+    
+    # Info button
+    if st.button("ℹ️ About This App", use_container_width=True):
+        st.session_state["show_info"] = True
+        st.rerun()
+    
+    st.markdown("---")
     current_step = st.session_state["step"]
 
     # Steps that have been reached are clickable
@@ -58,6 +68,7 @@ with st.sidebar:
         if i < current_step:
             if st.button(f"✅ {label}", key=f"nav_{i}", use_container_width=True):
                 st.session_state["step"] = i
+                st.session_state["show_info"] = False
                 st.rerun()
         elif i == current_step:
             st.markdown(f"**▶ {label}**")
@@ -71,19 +82,25 @@ with st.sidebar:
         st.rerun()
 
 
-# ── Step dispatcher ───────────────────────────────────────────────────────────
+# ── Show info page if requested ─────────────────────────────────────────────────
+if st.session_state["show_info"]:
+    render_info_page()
+    st.stop()
+
+
+# ── Step dispatcher ─────────────────────────────────────────────────────────────
 step = st.session_state["step"]
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 # STEP 1: Portfolio Entry
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 if step == 1:
     render_portfolio_form()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 # STEP 2: Data Retrieval & Audit
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 elif step == 2:
     st.header("Step 2: Data Retrieval & Audit")
     config: PortfolioConfig = st.session_state["portfolio_config"]
@@ -198,16 +215,16 @@ elif step == 2:
         st.rerun()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 # STEP 3: Benchmark Selection
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 elif step == 3:
     render_benchmark_selector()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 # STEP 4: Metrics Dashboard
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 elif step == 4:
     st.header("Step 4: Metrics Dashboard")
     config: PortfolioConfig = st.session_state["portfolio_config"]
@@ -275,16 +292,16 @@ elif step == 4:
         st.rerun()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 # STEP 5: What-If Engine
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 elif step == 5:
     render_what_if()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 # STEP 6: Charts & Report
-# ─────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
 elif step == 6:
     st.header("Step 6: Charts & Report")
 
@@ -333,7 +350,7 @@ elif step == 6:
     st.pyplot(fig_eff)
     plt.close(fig_eff)
 
-    # ── Bell Curve ────────────────────────────────────────────────────────────
+    # ── Bell Curve ─────────────────────────────────────────────────────────────
     st.subheader("Annual Portfolio Performance Projection")
     title_years = hypo_result["h_years"] if hypo_result else years
     fig_bell = plot_bell_curve(
@@ -355,7 +372,7 @@ elif step == 6:
                 f"Analysis based on only {actual_years:.1f} years (limited by **{youngest}**)."
             )
 
-    # ── Report section ────────────────────────────────────────────────────────
+    # ── Report section ───────────────────────────────────────────────────────────
     st.markdown("---")
     st.subheader("Full Report")
 
