@@ -2,12 +2,12 @@
 
 ## What is Portfolio Analyzer?
 
-**Portfolio Analyzer** is a smart, interactive tool for understanding your investment portfolio. Enter your holdings, and get instant insights into risk, return, and efficiency — all backed by live market data.
+**Portfolio Analyzer** is a smart, interactive tool for understanding your long-term investment portfolio. Enter your holdings, and get instant insights into risk, return, and efficiency — all backed by live market data.
 
-Whether you're a seasoned trader or just starting to invest, Portfolio Analyzer helps you:
+Whether you're building wealth steadily or optimizing an existing portfolio, Portfolio Analyzer helps you:
 - **See the bigger picture** — how your assets work together
-- **Make informed decisions** — understand risk vs. return trade-offs
-- **Experiment safely** — run "what-if" scenarios before making real changes
+- **Make informed decisions** — understand risk vs. return trade-offs for long-term growth
+- **Plan for the future** — test portfolio adjustments before committing to changes
 - **Compare fairly** — benchmark your performance against the market
 
 ---
@@ -37,8 +37,8 @@ View your portfolio's key metrics:
 - **Correlation Heatmap** — how your assets move together
 
 ### 5. **What-If Engine**
-Experiment with changes:
-- Add a new asset
+Plan strategic changes:
+- Add a new asset to your portfolio
 - Increase/decrease positions
 - Swap out holdings
 See how each change affects your portfolio's risk and return **instantly**.
@@ -56,8 +56,8 @@ Visualize your portfolio:
 ✅ **Live Market Data** — Real-time prices via Yahoo Finance  
 ✅ **Multi-Currency** — Work in ILS or USD (auto-converted)  
 ✅ **Data Validation** — Flags bad tickers before analysis  
-✅ **Instant Metrics** — Return, volatility, Sharpe, correlation  
-✅ **Scenario Planning** — Test changes before committing  
+✅ **Long-Term Metrics** — Return, volatility, Sharpe, correlation  
+✅ **Strategic Planning** — Test portfolio changes before implementing  
 ✅ **Beautiful Charts** — Risk/return scatter + return distribution  
 ✅ **PDF Reports** — Download a full analysis report  
 ✅ **No Sign-Up** — Just open and start analyzing  
@@ -66,11 +66,11 @@ Visualize your portfolio:
 
 ## Who Is This For?
 
-- **Individual Investors** — understand and optimize your portfolio
-- **Traders** — test strategies with "what-if" scenarios
-- **Learners** — explore portfolio theory interactively
-- **Portfolio Managers** — quick client-friendly analysis
-- **Anyone with investments** — get clarity on your holdings
+- **Long-Term Investors** — build and optimize wealth over years
+- **Retirement Planners** — understand your asset allocation risk
+- **Individual Portfolio Managers** — analyze and rebalance holdings
+- **Financial Learners** — explore portfolio theory interactively
+- **Anyone with investments** — get clarity and confidence in your holdings
 
 ---
 
@@ -114,4 +114,4 @@ Then open `http://localhost:8501` in your browser.
 
 ---
 
-**Made with ❤️ for smarter investing.**
+**Made with ❤️ for smart, long-term investing.**
